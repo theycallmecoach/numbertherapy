@@ -55,42 +55,47 @@ public class EnglishConverter implements IConverter {
     }
 
     if (value < 100) {
-      return upperCaseFirstLetter(convertUnder100(value));
+      return upperCaseFirstLetter(convertUnder100(value,false));
     }
 
     if (value < 1000) {
-      return upperCaseFirstLetter(convertUnder1000(value, true));
+      return upperCaseFirstLetter(convertUnder1000(value, true ));
     }
 
     final String result = upperCaseFirstLetter(convertOver999(value));
     return result;
   }
 
-  private String convertUnder100(final long val) {
+  private String convertUnder100(final long val, final boolean andFlag) {
     final int intVal = (int) val;
-    if (intVal < 20) {
+    if (intVal < 20 && !andFlag) {
       return NAMES_UNDER_TWENTY[intVal];
+    } else if (intVal < 20 && andFlag) {
+      return  "and " + NAMES_UNDER_TWENTY[intVal];
     }
     final int ones = intVal % 10;
     final int tens = (intVal / 10);
     final String onesStr = (ones == 0) ? "" : " " + NAMES_UNDER_TWENTY[ones];
-    final String result = NAMES_TENS[tens] + onesStr;
+    String result = NAMES_TENS[tens] + onesStr;
+    if (andFlag) {
+      result = "and " + result;
+    }
     return result;
   }
 
   private String convertUnder1000(final long val, final boolean andFlag) {
     final int intVal = (int) val;
     if (intVal < 100) {
-      return convertUnder100(val);
+      return convertUnder100(val, andFlag);
     }
     final int hundred = intVal / 100;
     final int tens = intVal % 100;
 
     String result = NAMES_UNDER_TWENTY[hundred] + " " + NAMES_BIG[0];
     if (tens > 0 && andFlag) {
-      result += " and " + convertUnder100(tens);
+      result += " " + convertUnder100(tens, andFlag);
     } else if (tens != 0) {
-      result += " " + convertUnder100(tens);
+      result += " " + convertUnder100(tens, andFlag);
     }
     return result;
   }
@@ -144,7 +149,7 @@ public class EnglishConverter implements IConverter {
    */
   public static void main(final String[] args) {
     final IConverter therapist = new EnglishConverter();
-    final String result = therapist.toWords(1001);
+    final String result = therapist.toWords(101);
     System.err.println(result);
   }
 }
