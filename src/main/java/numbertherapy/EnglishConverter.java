@@ -55,11 +55,11 @@ public class EnglishConverter implements IConverter {
     }
 
     if (value < 100) {
-      return upperCaseFirstLetter(convertUnder100(value,false));
+      return upperCaseFirstLetter(convertUnder100(value, false));
     }
 
     if (value < 1000) {
-      return upperCaseFirstLetter(convertUnder1000(value, true ));
+      return upperCaseFirstLetter(convertUnder1000(value, true));
     }
 
     final String result = upperCaseFirstLetter(convertOver999(value));
@@ -71,7 +71,7 @@ public class EnglishConverter implements IConverter {
     if (intVal < 20 && !andFlag) {
       return NAMES_UNDER_TWENTY[intVal];
     } else if (intVal < 20 && andFlag) {
-      return  "and " + NAMES_UNDER_TWENTY[intVal];
+      return "and " + NAMES_UNDER_TWENTY[intVal];
     }
     final int ones = intVal % 10;
     final int tens = (intVal / 10);
