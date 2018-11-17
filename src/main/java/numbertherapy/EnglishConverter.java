@@ -38,7 +38,6 @@ public class EnglishConverter implements IConverter {
     "eighty",
     "ninety" };
 
-
   private static final String[] NAMES_BIG = {
     "hundred",
     "thousand",
@@ -48,8 +47,6 @@ public class EnglishConverter implements IConverter {
     "quadrillion",
     "quintillion",
     "sextillion" };
-
-
 
   @Override
   public String toWords(final long value) {
@@ -62,13 +59,12 @@ public class EnglishConverter implements IConverter {
     }
 
     if (value < 1000) {
-      return upperCaseFirstLetter(convertUnder1000(value));
+      return upperCaseFirstLetter(convertUnder1000(value, true));
     }
 
     final String result = upperCaseFirstLetter(convertOver999(value));
     return result;
   }
-
 
   private String convertUnder100(final long val) {
     final int intVal = (int) val;
@@ -82,7 +78,7 @@ public class EnglishConverter implements IConverter {
     return result;
   }
 
-  private String convertUnder1000(final long val) {
+  private String convertUnder1000(final long val, final boolean andFlag) {
     final int intVal = (int) val;
     if (intVal < 100) {
       return convertUnder100(val);
@@ -91,8 +87,8 @@ public class EnglishConverter implements IConverter {
     final int tens = intVal % 100;
 
     String result = NAMES_UNDER_TWENTY[hundred] + " " + NAMES_BIG[0];
-    if (tens > 0) {
-      result += " and "  + convertUnder100(tens);
+    if (tens > 0 && andFlag) {
+      result += " and " + convertUnder100(tens);
     } else if (tens != 0) {
       result += " " + convertUnder100(tens);
     }
@@ -100,15 +96,36 @@ public class EnglishConverter implements IConverter {
   }
 
   private String convertOver999(final long value) {
-    // TODO Auto-generated method stub
-    return null;
+    for (int i = 0; i < NAMES_BIG.length; ++i) {
+      final long size = new Double(Math.pow(1000, i)).longValue();
+      // loop til we find how big a number we are dealing with...
+      if (size > value || size == Long.MAX_VALUE) {
+        final int stdIndex = i - 1;
+        final long denominator = new Double(Math.pow(1000, stdIndex)).longValue();
+        final long hundreds = value / denominator;
+        final long remainder = value - (denominator * hundreds);
+        String result = convertUnder1000(hundreds, value < 1000);
+        if (value >= 1000) {
+          result += " " + NAMES_BIG[stdIndex];
+        }
+
+        if (remainder > 0) {
+          result += " " + convertOver999(remainder);
+        }
+        return result;
+      }
+    }
+    throw new IllegalStateException("Should never get here, bad things have happened");
+
   }
 
   /**
-   * Returns a copy of the given string with the first character converted to upper case.
+   * Returns a copy of the given string with the first character converted to
+   * upper case.
    *
    * @param value the string to upper case
-   * @return copy with upper cased first letter or the original string in case of empty or null
+   * @return copy with upper cased first letter or the original string in case of
+   *         empty or null
    */
   private String upperCaseFirstLetter(final String value) {
     if (Strings.isNullOrEmpty(value)) {
@@ -116,17 +133,18 @@ public class EnglishConverter implements IConverter {
     }
     final String firstLetter = value.substring(0, 1);
     final String result = firstLetter.toUpperCase() + value.substring(1)
-                                               .trim();
+                                                           .trim();
     return result;
   }
 
   /**
    * Entry point.
+   *
    * @param args not used;
    */
   public static void main(final String[] args) {
     final IConverter therapist = new EnglishConverter();
-    final String result = therapist.toWords(10000001);
+    final String result = therapist.toWords(1001);
     System.err.println(result);
   }
 }
