@@ -46,11 +46,14 @@ public class EnglishConverter implements IConverter {
     "quintillion",
     "sextillion" };
 
-
   @Override
   public String toWords(final long value) {
     if (value == 0) {
       return upperCaseFirstLetter(NAMES_UNDER_TWENTY[0]);
+    }
+
+    if (value < 100) {
+      return upperCaseFirstLetter(convertUnder100(value));
     }
 
     String result = "";
@@ -58,6 +61,19 @@ public class EnglishConverter implements IConverter {
 
     return result;
   }
+
+  private String convertUnder100(final long val) {
+    final int intVal = (int) val;
+    if (intVal < 20) {
+      return NAMES_UNDER_TWENTY[intVal];
+    }
+    final int ones = intVal % 10;
+    final int tens = (intVal / 10);
+    final String onesStr = (ones == 0) ? "" : " " + NAMES_UNDER_TWENTY[ones];
+    final String result = NAMES_TENS[tens] + onesStr;
+    return result;
+  }
+
 
 
   /**
@@ -74,5 +90,10 @@ public class EnglishConverter implements IConverter {
     final String result = firstLetter.toUpperCase() + value.substring(1)
                                                .trim();
     return result;
+  }
+
+  public static void main(final String[] args) {
+    final IConverter therapist = new EnglishConverter();
+    final String result = therapist.toWords(10000001);
   }
 }
