@@ -27,6 +27,8 @@ public class EnglishConverter implements IConverter {
     "nineteen" };
 
   private static final String[] NAMES_TENS = {
+    "",
+    "",
     "twenty",
     "thirty",
     "forty",
@@ -38,6 +40,7 @@ public class EnglishConverter implements IConverter {
 
 
   private static final String[] NAMES_BIG = {
+    "hundred",
     "thousand",
     "million",
     "billion",
@@ -55,6 +58,11 @@ public class EnglishConverter implements IConverter {
     if (value < 100) {
       return upperCaseFirstLetter(convertUnder100(value));
     }
+
+    if (value < 1000) {
+      return upperCaseFirstLetter(convertUnder1000(value));
+    }
+
 
     String result = "";
     result = upperCaseFirstLetter(result);
@@ -74,6 +82,22 @@ public class EnglishConverter implements IConverter {
     return result;
   }
 
+  private String convertUnder1000(final long val) {
+    final int intVal = (int) val;
+    if (intVal < 100) {
+      return convertUnder100(val);
+    }
+    final int hundred = intVal / 100;
+    final int tens = intVal % 100;
+
+    String result = NAMES_UNDER_TWENTY[hundred] + " " + NAMES_BIG[0];
+    if (tens > 0) {
+      result += " and "  + convertUnder100(tens);
+    } else if (tens != 0) {
+      result += " " + convertUnder100(tens);
+    }
+    return result;
+  }
 
 
   /**
