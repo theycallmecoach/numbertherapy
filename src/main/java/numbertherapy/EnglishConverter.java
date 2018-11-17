@@ -49,6 +49,8 @@ public class EnglishConverter implements IConverter {
     "quintillion",
     "sextillion" };
 
+
+
   @Override
   public String toWords(final long value) {
     if (value == 0) {
@@ -63,12 +65,10 @@ public class EnglishConverter implements IConverter {
       return upperCaseFirstLetter(convertUnder1000(value));
     }
 
-
-    String result = "";
-    result = upperCaseFirstLetter(result);
-
+    final String result = upperCaseFirstLetter(convertOver999(value));
     return result;
   }
+
 
   private String convertUnder100(final long val) {
     final int intVal = (int) val;
@@ -99,6 +99,10 @@ public class EnglishConverter implements IConverter {
     return result;
   }
 
+  private String convertOver999(final long value) {
+    // TODO Auto-generated method stub
+    return null;
+  }
 
   /**
    * Returns a copy of the given string with the first character converted to upper case.
@@ -116,8 +120,13 @@ public class EnglishConverter implements IConverter {
     return result;
   }
 
+  /**
+   * Entry point.
+   * @param args not used;
+   */
   public static void main(final String[] args) {
     final IConverter therapist = new EnglishConverter();
     final String result = therapist.toWords(10000001);
+    System.err.println(result);
   }
 }

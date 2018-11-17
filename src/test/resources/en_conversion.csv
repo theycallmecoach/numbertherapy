@@ -19,14 +19,22 @@
 18, Eighteen
 19, Nineteen
 20, Twenty
+21, Twenty one
+29, Twenty nine
 30, Thirty
+31, Thirty one
 40, Forty
+41, Forty one
 50, Fifty
 60, Sixty
 70, Seventy
 80, Eighty
 90, Ninety
+99, Ninety nine
 100, One hundred
+101, One hundred and one
+110, One hundred and ten
+199, One hundred and ninety nine
 200, Two hundred
 300, Three hundred
 400, Four hundred
@@ -36,10 +44,23 @@
 800, Eight hundred
 900, Nine hundred
 1000, One thousand
+1001, One thousand and one
+1012, One thousand and twelve
+1200, One thousand two hundred
 10000, Ten thousand
 100000, One hundred thousand
+100001, One hundred thousand and one
+100060, One hundred thousand and sixty
+100260, One hundred thousand two hundred and sixty
+820260, Eight hundred twenty thousand two hundred and sixty
+821260, Eight hundred twenty one thousand two hundred and sixty
+821261, Eight hundred twenty one thousand two hundred and sixty one
 1000000, One million
 1000000000, One billion
+1999000000, One billion nine hundred ninety nine million
+1999000001, One billion nine hundred ninety nine million and one
+1999000020, One billion nine hundred ninety nine million and twenty
+1999000200, One billion nine hundred ninety nine million two hundred
 1000000000000, One trillion
 1000000000000000, One quadrillion
 1000000000000000000, One quintillion
