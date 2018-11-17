@@ -59,27 +59,29 @@ public class EnglishConverter implements IConverter {
     final int[] groups = new int[MAX_GROUPS];
     long curValue = value;
     for (int i = 0; i < MAX_GROUPS; ++i) {
-      groups[i] = (int) curValue % 1000;
+      groups[i] = (int) (curValue % 1000);
       curValue /= 1000;
     }
 
+    final long posValue = (Math.abs(value));
+    boolean andFlag = false;
+    if (posValue > 100 && (groups[0] % 100) != 0) {
+      andFlag = true;
+    }
     final String[] groupString = new String[MAX_GROUPS];
     for (int i = 0; i < MAX_GROUPS; ++i) {
-      groupString[i] = convertHundredsGroup(groups[i]);
+      groupString[i] = convertHundredsGroup(groups[i], andFlag);
+      if (i == 0) {
+        andFlag = false;
+      }
     }
-
-    boolean andFlag = groups[0] > 0 && groups[0] < 100;
 
     String result = groupString[0];
     for (int i = 1; i < MAX_GROUPS; ++i) {
       if (groups[i] == 0) {
         continue;
       }
-      String newStr = groupString[i] + " " + NAMES_BIG[i];
-      if (andFlag) {
-        newStr += " and";
-        andFlag = false;
-      }
+      final String newStr = groupString[i] + " " + NAMES_BIG[i];
       result = newStr + " " + result;
     }
 
@@ -97,14 +99,24 @@ public class EnglishConverter implements IConverter {
     return result;
   }
 
-  private String convertHundredsGroup(final int value) {
+  private String convertHundredsGroup(final int value, final boolean andFlag) {
     final int hundreds = value / 100;
     final int tens = value % 100;
 
     String result = "";
     if (hundreds != 0) {
-      result = NAMES_UNDER_TWENTY[hundreds] + NAMES_BIG[0];
-      return result;
+      result = NAMES_UNDER_TWENTY[hundreds] + " " + NAMES_BIG[0];
+      if (andFlag) {
+        result += " and ";
+      } else if (tens != 0) {
+        result += " ";
+      }
+//      else {
+//        result += " ";
+//      }
+    }
+    if (andFlag && value < 100) {
+      result += "and ";
     }
 
     result += convertTensGroup(tens);
@@ -116,12 +128,13 @@ public class EnglishConverter implements IConverter {
     final int ones = value % 10;
 
     String result = "";
-    if (value < 2) {
-      if (tens != 0) {
-        result = NAMES_TENS[tens];
-        return result;
+    if (tens >= 2) {
+      result += NAMES_TENS[tens];
+      if (ones != 0) {
+        result += " " + NAMES_UNDER_TWENTY[ones];
       }
-      result = NAMES_UNDER_TWENTY[ones];
+    } else if (value != 0) {
+      result = NAMES_UNDER_TWENTY[value];
     }
 
     return result;
@@ -210,7 +223,7 @@ public class EnglishConverter implements IConverter {
    */
   public static void main(final String[] args) {
     final IConverter therapist = new EnglishConverter();
-    final String result = therapist.toWords(9);
+    final String result = therapist.toWords(64);
     System.err.println(result);
   }
 }
