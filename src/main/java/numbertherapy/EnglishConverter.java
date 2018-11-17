@@ -48,21 +48,82 @@ public class EnglishConverter implements IConverter {
     "quintillion",
     "sextillion" };
 
+  public static final int MAX_GROUPS = 7;
+
   @Override
   public String toWords(final long value) {
     if (value == 0) {
       return upperCaseFirstLetter(NAMES_UNDER_TWENTY[0]);
     }
 
-    if (value < 100) {
-      return upperCaseFirstLetter(convertUnder100(value, false));
+    final int[] groups = new int[MAX_GROUPS];
+    long curValue = value;
+    for (int i = 0; i < MAX_GROUPS; ++i) {
+      groups[i] = (int) curValue % 1000;
+      curValue /= 1000;
     }
 
-    if (value < 1000) {
-      return upperCaseFirstLetter(convertUnder1000(value, true));
+    final String[] groupString = new String[MAX_GROUPS];
+    for (int i = 0; i < MAX_GROUPS; ++i) {
+      groupString[i] = convertHundredsGroup(groups[i]);
     }
 
-    final String result = upperCaseFirstLetter(convertOver999(value));
+    boolean andFlag = groups[0] > 0 && groups[0] < 100;
+
+    String result = groupString[0];
+    for (int i = 1; i < MAX_GROUPS; ++i) {
+      if (groups[i] == 0) {
+        continue;
+      }
+      String newStr = groupString[i] + " " + NAMES_BIG[i];
+      if (andFlag) {
+        newStr += " and";
+        andFlag = false;
+      }
+      result = newStr + " " + result;
+    }
+
+    result = upperCaseFirstLetter(result);
+
+//    if (value < 100) {
+//      return upperCaseFirstLetter(convertUnder100(value, false));
+//    }
+//
+//    if (value < 1000) {
+//      return upperCaseFirstLetter(convertUnder1000(value, true));
+//    }
+//
+//    final String result = upperCaseFirstLetter(convertOver999(value));
+    return result;
+  }
+
+  private String convertHundredsGroup(final int value) {
+    final int hundreds = value / 100;
+    final int tens = value % 100;
+
+    String result = "";
+    if (hundreds != 0) {
+      result = NAMES_UNDER_TWENTY[hundreds] + NAMES_BIG[0];
+      return result;
+    }
+
+    result += convertTensGroup(tens);
+    return result;
+  }
+
+  private String convertTensGroup(final int value) {
+    final int tens = value / 10;
+    final int ones = value % 10;
+
+    String result = "";
+    if (value < 2) {
+      if (tens != 0) {
+        result = NAMES_TENS[tens];
+        return result;
+      }
+      result = NAMES_UNDER_TWENTY[ones];
+    }
+
     return result;
   }
 
@@ -149,7 +210,7 @@ public class EnglishConverter implements IConverter {
    */
   public static void main(final String[] args) {
     final IConverter therapist = new EnglishConverter();
-    final String result = therapist.toWords(101);
+    final String result = therapist.toWords(9);
     System.err.println(result);
   }
 }
