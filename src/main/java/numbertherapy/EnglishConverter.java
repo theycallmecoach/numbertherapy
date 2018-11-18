@@ -5,11 +5,12 @@ import com.google.common.base.Strings;
 /**
  * Implements the IConverter interface by converting the given long into it's
  * English language equivalent.
- *
+ * <p/>
  * The conversion by breaking up the long into <code>MAX_GROUPS</code> groups
  * each representing a 'thousand' or three digits of the number. These groups
  * are converted individually into English and then all groups are combined into
- * the final result string by placing the appropriate number between the groups.
+ * the final result by placing the appropriate to the groups original location
+ * within the given value number between the groups.
  *
  *
  * @author Kyle Girard theycallmecoach@gmail.com
