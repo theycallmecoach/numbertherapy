@@ -57,6 +57,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M1</version>
 			</plugin>
+        <!-- allow execution directly from maven -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
@@ -70,8 +71,6 @@
 				<artifactId>spotbugs-maven-plugin</artifactId>
 				<version>3.1.7</version>
 				<dependencies>
-					<!-- overwrite dependency on spotbugs if you want to specify the version 
-						of spotbugs -->
 					<dependency>
 						<groupId>com.github.spotbugs</groupId>
 						<artifactId>spotbugs</artifactId>
@@ -80,6 +79,7 @@
 				</dependencies>
 			</plugin>
 			<plugin>
+        <!-- package dependencies into a library for the executable jar -->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
