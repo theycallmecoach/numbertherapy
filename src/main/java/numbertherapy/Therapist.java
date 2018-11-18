@@ -42,7 +42,7 @@ public class Therapist {
     try (final Scanner scanner = new Scanner(System.in, "UTF-8")) {
       while (true) {
         try {
-          System.out.print("Please enter an integer:");
+          System.out.print("Please enter an integer: ");
           System.out.flush();
           String input = scanner.nextLine();
           if (input.equalsIgnoreCase("pineapple") || input.equalsIgnoreCase("exit")) {
