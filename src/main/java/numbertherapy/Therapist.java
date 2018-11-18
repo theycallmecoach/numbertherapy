@@ -17,7 +17,8 @@ public class Therapist {
 
   /**
    * Creates a therapist that will use the given converter within therapy sessions
-   * to facilitate communication with numbers.
+   * to facilitate communication with numbers. (convert them to English word
+   * equivalents)
    *
    * @param converter instance of converter cannot be null
    */

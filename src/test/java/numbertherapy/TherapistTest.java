@@ -80,7 +80,8 @@ class TherapistTest {
     System.setOut(out);
     therapist.startTherapySession();
     final String allWrittenLines = new String(bo.toByteArray());
-    assertTrue(allWrittenLines.contains("Your number says: One hundred twenty three thousand one hundred and twenty three"));
+    assertTrue(allWrittenLines.contains("Your number says: One hundred twenty"
+        + " three thousand one hundred and twenty three"));
   }
 
   @Test
@@ -90,7 +91,8 @@ class TherapistTest {
     System.setOut(out);
     therapist.startTherapySession();
     final String allWrittenLines = new String(bo.toByteArray());
-    assertTrue(allWrittenLines.contains("Your number says: Nine billion three hundred seventy three million nine hundred thirty eight thousand three hundred and thirty three"));
+    assertTrue(allWrittenLines.contains("Your number says: Nine billion three hundred seventy three million "
+        + "nine hundred thirty eight thousand three hundred and thirty three"));
   }
 
 }

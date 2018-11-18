@@ -45,7 +45,7 @@ public class EnglishConverter implements IConverter {
     "sixteen",
     "seventeen",
     "eighteen",
-    "nineteen" };
+  "nineteen" };
 
   /*
    * English names for number multiples of 10 under 100. The empty entries
@@ -62,7 +62,7 @@ public class EnglishConverter implements IConverter {
     "sixty",
     "seventy",
     "eighty",
-    "ninety" };
+  "ninety" };
 
   /*
    * English names for the big numbers. Highest is quintillion since that is the
@@ -75,7 +75,7 @@ public class EnglishConverter implements IConverter {
     "billion",
     "trillion",
     "quadrillion",
-    "quintillion" };
+  "quintillion" };
 
   /**
    * Converts the given long to words in English.
@@ -122,8 +122,8 @@ public class EnglishConverter implements IConverter {
   }
 
   /*
-   * Combine group strings with the appropriate NAMES_BIG name depending
-   * on the groups location.
+   * Combine group strings with the appropriate NAMES_BIG name depending on the
+   * groups location.
    */
   private String combineGroupStrings(final int[] groups, final String[] groupString) {
     String result = groupString[0];
@@ -230,7 +230,7 @@ public class EnglishConverter implements IConverter {
     }
     final String firstLetter = value.substring(0, 1);
     final String result = firstLetter.toUpperCase() + value.substring(1)
-                                                           .trim();
+    .trim();
     return result;
   }
 
