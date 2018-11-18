@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.cagey</groupId>
 	<artifactId>numbertherapy</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>Number Therapy</name>
 	<description>An application that make numbers talk about themselves (aka converts them to English)</description>
 	<properties>
