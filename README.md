@@ -61,7 +61,7 @@ or build it and run the executable jar
 ```
 mvn clean package
 cd target
-java -jar numbertherapy-0.0.1-SNAPSHOT.jar 
+java -jar numbertherapy-1.0.0.jar 
 ```
 
 The application will display instructions for the therapy session and then prompt the user to enter a number to commence the session.
