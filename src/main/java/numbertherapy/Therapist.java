@@ -35,7 +35,7 @@ public class Therapist {
     System.out.println("Welcome to Number Therapy");
     System.out.println("==========================\n");
     System.out.println("In this session we will help the integers between \n" + Long.MIN_VALUE + " and "
-        + Long.MAX_VALUE + " to communicate in english\n");
+        + Long.MAX_VALUE + " to say their names in english\n");
     System.out.println("Please note that spaces and commas are ignored in these sessions");
     System.out.println("You can end the session at any time by entering the safe words 'pineapple' or 'exit'\n");
 
