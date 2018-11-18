@@ -48,6 +48,8 @@
 1012, One thousand and twelve
 1200, One thousand two hundred
 10000, Ten thousand
+10900, Ten thousand nine hundred
+10999, Ten thousand nine hundred and ninety nine
 100000, One hundred thousand
 100001, One hundred thousand and one
 100060, One hundred thousand and sixty
@@ -62,5 +64,81 @@
 1999000020, One billion nine hundred ninety nine million and twenty
 1999000200, One billion nine hundred ninety nine million two hundred
 1000000000000, One trillion
+10000000000000, Ten trillion
+100000000000000, One hundred trillion
+100000000000001, One hundred trillion and one
 1000000000000000, One quadrillion
 1000000000000000000, One quintillion
+9223372036854775807,Nine quintillion two hundred twenty three quadrillion three hundred seventy two trillion thirty six billion eight hundred fifty four million seven hundred seventy five thousand eight hundred and seven
+-1, Negative one
+-2, Negative two
+-3, Negative three
+-4, Negative four
+-5, Negative five
+-6, Negative six
+-7, Negative seven
+-8, Negative eight
+-9, Negative nine
+-10, Negative ten
+-11, Negative eleven
+-12, Negative twelve
+-13, Negative thirteen
+-14, Negative fourteen
+-15, Negative fifteen
+-16, Negative sixteen
+-17, Negative seventeen
+-18, Negative eighteen
+-19, Negative nineteen
+-20, Negative twenty
+-21, Negative twenty one
+-29, Negative twenty nine
+-30, Negative thirty
+-31, Negative thirty one
+-40, Negative forty
+-41, Negative forty one
+-50, Negative fifty
+-60, Negative sixty
+-70, Negative seventy
+-80, Negative eighty
+-90, Negative ninety
+-99, Negative ninety nine
+-100, Negative one hundred
+-101, Negative one hundred and one
+-110, Negative one hundred and ten
+-199, Negative one hundred and ninety nine
+-200, Negative two hundred
+-300, Negative three hundred
+-400, Negative four hundred
+-500, Negative five hundred
+-600, Negative six hundred
+-700, Negative seven hundred
+-800, Negative eight hundred
+-900, Negative nine hundred
+-1000, Negative one thousand
+-1001, Negative one thousand and one
+-1012, Negative one thousand and twelve
+-1200, Negative one thousand two hundred
+-10000, Negative ten thousand
+-10900, Negative ten thousand nine hundred
+-10999, Negative ten thousand nine hundred and ninety nine
+-100000, Negative one hundred thousand
+-100001, Negative one hundred thousand and one
+-100060, Negative one hundred thousand and sixty
+-100260, Negative one hundred thousand two hundred and sixty
+-820260, Negative eight hundred twenty thousand two hundred and sixty
+-821260, Negative eight hundred twenty one thousand two hundred and sixty
+-821261, Negative eight hundred twenty one thousand two hundred and sixty one
+-1000000, Negative one million
+-1000000000, Negative one billion
+-1999000000, Negative one billion nine hundred ninety nine million
+-1999000001, Negative one billion nine hundred ninety nine million and one
+-1999000020, Negative one billion nine hundred ninety nine million and twenty
+-1999000200, Negative one billion nine hundred ninety nine million two hundred
+-1000000000000, Negative one trillion
+-10000000000000, Negative ten trillion
+-100000000000000, Negative one hundred trillion
+-100000000000001, Negative one hundred trillion and one
+-1000000000000000, Negative one quadrillion
+-1000000000000000000, Negative one quintillion
+-9223372036854775808, Negative nine quintillion two hundred twenty three quadrillion three hundred seventy two trillion thirty six billion eight hundred fifty four million seven hundred seventy five thousand eight hundred and eight
+
