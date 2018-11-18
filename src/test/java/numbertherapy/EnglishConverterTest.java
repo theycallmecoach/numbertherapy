@@ -17,7 +17,7 @@ class EnglishConverterTest {
   }
 
   @DisplayName("Should return english for all supplied numbers")
-  @ParameterizedTest(name = "''{0}'' -> ''{1}''")
+  @ParameterizedTest(name = "''{0}'' => ''{1}''")
   @CsvFileSource(resources = "/en_conversion.csv")
   void whenGivenNumberReturnWord(final long val, final String expectedResult) {
     assertEquals(expectedResult, converter.toWords(val));

@@ -1,7 +1,7 @@
 package numbertherapy;
 
 /**
- * Entry Point for number Therapy.
+ * Entry point for number Therapy.
  *
  * @author Kyle Girard theycallmecoach@gmail.com
  *

@@ -24,7 +24,7 @@ public class EnglishConverter implements IConverter {
   private static final String WORD_NEGATIVE = "negative";
   private static final String WORD_AND = "and";
 
-  /* English names for number under twenty */
+  /* English names for numbers under twenty */
   private static final String[] NAMES_UNDER_TWENTY = {
     "zero",
     "one",
@@ -77,6 +77,11 @@ public class EnglishConverter implements IConverter {
     "quadrillion",
     "quintillion" };
 
+  /**
+   * Converts the given long to words in English.
+   *
+   * @see numbertherapy.IConverter#toWords(long)
+   */
   @Override
   public String toWords(final long value) {
     if (value == 0) {
@@ -116,6 +121,10 @@ public class EnglishConverter implements IConverter {
     return result;
   }
 
+  /*
+   * Combine group strings with the appropriate NAMES_BIG name depending
+   * on the groups location.
+   */
   private String combineGroupStrings(final int[] groups, final String[] groupString) {
     String result = groupString[0];
     for (int i = 1; i < MAX_GROUPS; ++i) {
@@ -129,12 +138,15 @@ public class EnglishConverter implements IConverter {
   }
 
   /*
-   * If our value is the lower bound we have to
+   * If our value is the lower bound we have to adjust it.
    */
   private long lowerBoundsCheck(final long value) {
     return Math.abs((value == Long.MIN_VALUE) ? value + 1 : value);
   }
 
+  /*
+   * Divide the given value into groups of a thousand
+   */
   private int[] splitIntoGroups(final long value) {
     final int[] groups = new int[MAX_GROUPS];
     long curValue = value;
@@ -145,6 +157,10 @@ public class EnglishConverter implements IConverter {
     return groups;
   }
 
+  /*
+   * Converts each group to a string, andFlag only used in the first/smallest
+   * group.
+   */
   private String[] convertGroupsToStrings(final int[] groups, boolean andFlag) {
     final String[] groupString = new String[MAX_GROUPS];
     for (int i = 0; i < MAX_GROUPS; ++i) {
@@ -154,6 +170,10 @@ public class EnglishConverter implements IConverter {
     return groupString;
   }
 
+  /*
+   * Convert value which can at most be +/- 999 to English taking into account
+   * when to add 'and'
+   */
   private String convertHundredsGroup(final int value, final boolean andFlag) {
     final int hundreds = value / 100;
     final int tens = value % 100;
@@ -175,6 +195,9 @@ public class EnglishConverter implements IConverter {
     return result;
   }
 
+  /*
+   * Convert value which is at most 99 to English
+   */
   private String convertTensGroup(final int value) {
     final int tens = value / 10;
     final int ones = value % 10;

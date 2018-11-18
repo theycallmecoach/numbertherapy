@@ -6,9 +6,12 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("Test user input/output to the therapist")
 class TherapistTest {
 
   private ByteArrayOutputStream bo;
@@ -20,13 +23,19 @@ class TherapistTest {
     bo = new ByteArrayOutputStream();
     out = new PrintStream(bo);
     therapist = new Therapist(new EnglishConverter());
-    therapist.setPrintStream(out);
+  }
+
+  @AfterEach
+  void teardown() {
+    System.setIn(System.in);
+    System.setOut(System.out);
   }
 
   @Test
   void testTherapistWithEnglishConverter() {
     final ByteArrayInputStream in = new ByteArrayInputStream("10\nexit".getBytes());
-    therapist.setInputStream(in);
+    System.setIn(in);
+    System.setOut(out);
     therapist.startTherapySession();
     final String allWrittenLines = new String(bo.toByteArray());
     assertTrue(allWrittenLines.contains("Your number says: Ten"));
@@ -35,20 +44,20 @@ class TherapistTest {
   @Test
   void testTherapistWithPineappleSafeword() {
     final ByteArrayInputStream in = new ByteArrayInputStream("10\npineapple".getBytes());
-    therapist.setInputStream(in);
+    System.setIn(in);
+    System.setOut(out);
     therapist.startTherapySession();
     final String allWrittenLines = new String(bo.toByteArray());
     assertTrue(allWrittenLines.contains("Your number says: Ten"));
   }
-
 
   @Test
   void testStartTherapySession() {
     final IConverter pinapple = value -> "The safeword is pineapple";
     final Therapist t = new Therapist(pinapple);
     final ByteArrayInputStream in = new ByteArrayInputStream("1034234234\nexit".getBytes());
-    t.setInputStream(in);
-    t.setPrintStream(out);
+    System.setOut(out);
+    System.setIn(in);
     t.startTherapySession();
     final String allWrittenLines = new String(bo.toByteArray());
     assertTrue(allWrittenLines.contains("The safeword is pineapple"));
@@ -57,7 +66,8 @@ class TherapistTest {
   @Test
   void testInvalidInput() {
     final ByteArrayInputStream in = new ByteArrayInputStream("abc\nexit".getBytes());
-    therapist.setInputStream(in);
+    System.setIn(in);
+    System.setOut(out);
     therapist.startTherapySession();
     final String allWrittenLines = new String(bo.toByteArray());
     assertTrue(allWrittenLines.contains("Sorry that doesn't appear to be a valid integer"));
@@ -66,7 +76,8 @@ class TherapistTest {
   @Test
   void testInputWithCommas() {
     final ByteArrayInputStream in = new ByteArrayInputStream("123,123\nexit".getBytes());
-    therapist.setInputStream(in);
+    System.setIn(in);
+    System.setOut(out);
     therapist.startTherapySession();
     final String allWrittenLines = new String(bo.toByteArray());
     assertTrue(allWrittenLines.contains("Your number says: One hundred twenty three thousand one hundred and twenty three"));
@@ -75,8 +86,8 @@ class TherapistTest {
   @Test
   void testInputWithWhitespace() {
     final ByteArrayInputStream in = new ByteArrayInputStream("9373 9383 3 3 \nexit".getBytes());
-    therapist.setInputStream(in);
-    therapist.setPrintStream(out);
+    System.setIn(in);
+    System.setOut(out);
     therapist.startTherapySession();
     final String allWrittenLines = new String(bo.toByteArray());
     assertTrue(allWrittenLines.contains("Your number says: Nine billion three hundred seventy three million nine hundred thirty eight thousand three hundred and thirty three"));

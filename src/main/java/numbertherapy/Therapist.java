@@ -2,13 +2,11 @@ package numbertherapy;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
  * Represents the therapist who helps facilitate numbers ability to communicate
- * in English.
+ * using a converter.
  *
  * @author Kyle Girard theycallmecoach@gmail.com
  *
@@ -16,9 +14,6 @@ import java.util.Scanner;
 public class Therapist {
 
   private final IConverter converter;
-
-  private InputStream in = System.in;
-  private PrintStream out = System.out;
 
   /**
    * Creates a therapist that will use the given converter within therapy sessions
@@ -30,33 +25,25 @@ public class Therapist {
     this.converter = checkNotNull(converter);
   }
 
-  void setInputStream(final InputStream is) {
-    in = is;
-  }
-
-  void setPrintStream(final PrintStream o) {
-    out = o;
-  }
-
   /**
    * Starts the interactive therapy session where numbers are encouraged to
    * communicate to the user.
    */
   public void startTherapySession() {
 
-    out.println("Welcome to Number Therapy");
-    out.println("==========================\n");
-    out.println("In this session we will help the integers between \n" + Long.MIN_VALUE + " and "
+    System.out.println("Welcome to Number Therapy");
+    System.out.println("==========================\n");
+    System.out.println("In this session we will help the integers between \n" + Long.MIN_VALUE + " and "
         + Long.MAX_VALUE + " to communicate in english\n");
-    out.println("Please note that spaces and commas are ignored in these sessions");
-    out.println("You can end the session at any time by entering the safe words 'pineapple' or 'exit'\n");
+    System.out.println("Please note that spaces and commas are ignored in these sessions");
+    System.out.println("You can end the session at any time by entering the safe words 'pineapple' or 'exit'\n");
 
     // create a scanner so we can read the command-line input
-    try (final Scanner scanner = new Scanner(in)) {
+    try (final Scanner scanner = new Scanner(System.in)) {
       while (true) {
         try {
-          out.print("Please enter an integer:");
-          out.flush();
+          System.out.print("Please enter an integer:");
+          System.out.flush();
           String input = scanner.nextLine();
           if (input.equalsIgnoreCase("pineapple") || input.equalsIgnoreCase("exit")) {
             break;
@@ -64,14 +51,13 @@ public class Therapist {
           input = input.replaceAll("\\s+|,", "");
           final long value = Long.valueOf(input);
           final String result = converter.toWords(value);
-          out.println("Your number says: " + result);
+          System.out.println("Your number says: " + result);
         } catch (final NumberFormatException ex) {
-          out.println("Sorry that doesn't appear to be a valid integer");
+          System.out.println("Sorry that doesn't appear to be a valid integer");
         }
       }
     }
-    // get their input as a String
-    out.println("Thank you for visiting Number Therapy.  See you again soon!");
+    System.out.println("Thank you for visiting Number Therapy.  See you again soon!");
   }
 
 }
