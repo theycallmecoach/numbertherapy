@@ -39,7 +39,7 @@ public class Therapist {
     System.out.println("You can end the session at any time by entering the safe words 'pineapple' or 'exit'\n");
 
     // create a scanner so we can read the command-line input
-    try (final Scanner scanner = new Scanner(System.in)) {
+    try (final Scanner scanner = new Scanner(System.in, "UTF-8")) {
       while (true) {
         try {
           System.out.print("Please enter an integer:");
@@ -49,7 +49,7 @@ public class Therapist {
             break;
           }
           input = input.replaceAll("\\s+|,", "");
-          final long value = Long.valueOf(input);
+          final long value = Long.parseLong(input);
           final String result = converter.toWords(value);
           System.out.println("Your number says: " + result);
         } catch (final NumberFormatException ex) {
